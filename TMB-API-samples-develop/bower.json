@@ -1,0 +1,15 @@
+{
+  "name": "tmb-api-samples",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "jquery": "~1.11.0",
+    "highlightjs": "~8.0.0",
+    "seiyria-bootstrap-slider": "~3.1.0",
+    "bootstrap-select": "~1.6.3",
+    "ol3-layerswitcher": "https://github.com/geomatico/ol3-layerswitcher.git#0.0.1",
+    "moment": "~2.9.0",
+    "bootstrap": "3.0.0"
+  },
+  "devDependencies": {}
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        include "head.html"
+
+		include "ol3/head.html"
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        include "header.html"
+
+        <section class="main-section">
+
+        <div class="container">
+
+            <h2>Basic map</h2>
+
+            <p>This sample shows how to create a very basic map with two raster layers, CARTO SOFT TMB Layer and TMB raster layer.</p>
+
+            <div id="map" class="map"></div>
+
+            include "text-muted.html"
+
+            include "footer.html"
+
+        </div>
+
+        </section>
+
+		include "ol3/tail.html"
+
+        include "tail.html"
+
+        include "ganalytics.html"
+        
+        <script id="code">
+		    var layers = [
+		        new ol.layer.Tile({
+		            source: new ol.source.TileWMS({
+		                params: {
+		                    'LAYERS': 'TMB:CARTO_SOFT',
+		                    'FORMAT': 'image/png8',
+		                    'srs': 'EPSG:3857',
+		                    'app_key': write_your_app_key_here,
+		                    'app_id': write_your_app_id_here
+		                },
+		                url: 'https://api.tmb.cat/v1/maps/gwc/wms'
+		            })
+		        }),
+		        new ol.layer.Image({
+		            source: new ol.source.ImageWMS({
+		                params: {
+		                    'LAYERS': 'TMB:XARXA_METRO',
+		                    'FORMAT': 'image/png8',
+		                    'TRANSPARENT': true,
+		                    'app_id': write_your_app_id_here,
+		                    'app_key': write_your_app_key_here
+		                },
+		                url: 'https://api.tmb.cat/v1/maps/wms'
+		            })
+		        })
+		    ];
+
+		    var map = new ol.Map({
+		        layers: layers,
+		        target: 'map',
+		        view: new ol.View({
+		            center: new ol.proj.transform([2.1574, 41.3987], "EPSG:4326", "EPSG:3857"),
+		            projection: 'EPSG:3857',
+		            zoom: 12
+		        })
+		    });
+        </script>
+
+        include "sourcecode.html"
+
+    </body>
+</html>

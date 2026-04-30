@@ -1,0 +1,74 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        include "head.html"
+
+        include "leaflet/head.html"
+    </head>
+    <body>
+        <!--[if lt IE 10]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        include "header.html"
+
+        <section class="main-section">
+
+        <div class="container">
+
+            <h2>Basic map with Leaflet</h2>
+
+            <p>This sample shows how to create a very basic map with two raster layers, CARTO SOFT TMB Layer and TMB raster layer but using Leaflet Maps library instead OL3.</p>
+
+			<!-- HERE YOUR HTML e.g.: map, select, button... -->
+			
+            <div id="map" class="map"></div>
+            
+            <!-- -->
+
+            include "text-muted.html"
+
+            include "footer.html"
+
+        </div>
+
+        </section>
+
+        include "leaflet/tail.html"
+
+        include "tail.html"
+
+        include "ganalytics.html"
+        
+        <script>
+        	  
+        </script>
+        
+        <script id="code">
+
+            'use strict';
+
+            var map = L.map('map').setView([41.3987, 2.1574], 12);
+
+            L.tileLayer.wms("https://api.tmb.cat/v1/maps/gwc/wms", {
+                'layers': 'TMB:CARTO_SOFT',
+                'format': 'image/png8',
+                'transparent': true,
+                'app_key': write_your_app_key_here,
+                'app_id': write_your_app_id_here
+            }).addTo(map);
+
+            L.tileLayer.wms("https://api.tmb.cat/v1/maps/wms", {
+                'layers': 'TMB:XARXA_METRO',
+                'format': 'image/png8',
+                'transparent': true,
+                'app_key': write_your_app_key_here,
+                'app_id': write_your_app_id_here
+            }).addTo(map);
+        	
+        </script>
+
+        include "sourcecode.html"
+
+    </body>
+</html>

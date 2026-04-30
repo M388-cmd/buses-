@@ -1,0 +1,15 @@
+app/*.html
+!app/404.html
+app/scripts/auth.js
+node_modules
+dist
+gist
+!includes/gist
+.tmp
+.sass-cache
+bower_components
+test/bower_components
+.project
+.idea/
+.grunt/
+pass.json

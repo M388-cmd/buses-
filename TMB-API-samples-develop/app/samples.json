@@ -1,0 +1,119 @@
+[
+  {
+    "title": "Basic Maps",
+    "samples": [
+      {
+        "title": "A basic map",
+        "description": "Show the most basic way to create a map with two layers",
+        "url": "api_01_basic_map.html",
+        "thumbnail": "api_01_basic_map.png"
+      },
+      {
+        "title": "A basic map with GetFeatureInfo",
+        "description": "Show the most basic way to create a map with GetFeatureInfo control",
+        "url": "sample_01_basic_map_info_gist.html",
+        "thumbnail": "sample_01_basic_map_info_gist.png"
+      },
+      {
+        "title": "LayerSwitcher",
+        "description": "Changing between TMB layers with a layerswitcher",
+        "url": "api_04_layerswitcher.html",
+        "thumbnail": "api_04_layerswitcher.png"
+      },
+      {
+        "title": "A basic Map using Leaflet",
+        "description": "Show the most basic way to create a map with two layers using the Leaflet library",
+        "url": "api_07_leaflet_basic_map.html",
+        "thumbnail": "api_07_leaflet_basic_map.png"
+      },
+      {
+        "title": "A basic Map using GMaps Library",
+        "description": "Show the most basic way to create a map with two layers using the GMaps library",
+        "url": "gmaps_basic_map.html",
+        "thumbnail": "gmaps_basic_map.png"
+      }
+    ]
+  }, {
+  "title": "Layers and Filters",
+  "samples": [
+    {
+      "title": "WMS layer by GET ",
+      "description": "Add a WMS layer by GET parameter",
+      "url": "api_02_basic_wms_layer.html",
+      "thumbnail": "api_02_basic_wms_layer.png"
+    },
+    {
+      "title": "WFS layer by GET ",
+      "description": "Add a WFS layer by GET parameter",
+      "url": "api_03_basic_wfs_layer.html",
+      "thumbnail": "api_03_basic_wfs_layer.png"
+    },
+    {
+      "title": "Simple WFS layer",
+      "description": "Add a WFS layer",
+      "url": "sample_02_basic_map_wfs_gist.html",
+      "thumbnail": "sample_02_basic_map_wfs_gist.png"
+    },
+    {
+      "title": "WFS selector and WMS layer filter by",
+      "description": "A selector populated with WFS data filters a WMS layer",
+      "url": "sample_03_basic_map_geocode_gist.html",
+      "thumbnail": "sample_03_basic_map_geocode_gist.png"
+    }
+  ]
+}, {
+  "title": "Bus service",
+  "samples": [
+    {
+      "title": "Bus lines and stops",
+      "description": "List the bus lines. When one selected, show its stops (for each line direction).",
+      "url": "bus_lines_and_stops.html",
+      "thumbnail": "bus_lines_and_stops.png"
+    },
+    {
+      "title": "Where I am?",
+      "description": "Discover nearby services",
+      "url": "on_soc_sample_gist.html",
+      "thumbnail": "on_soc_sample_gist.png"
+    },
+    {
+      "title": "Exploring surface elements",
+      "description": "Exploring elements surface using layer ELEMENTS_SUPERFICIE",
+      "url": "on_soc_using_layer.html",
+      "thumbnail": "on_soc_using_layer.png"
+    }
+  ]
+}, {
+  "title": "Time",
+  "samples": [
+    {
+      "title": "Playing with Time as variable",
+      "description": "The page reloading itself every 10 seconds loading new data",
+      "url": "sample_04_autoreload_gist.html",
+      "thumbnail": "sample_04_autoreload_gist.png"
+    },
+    {
+      "title": "Playing with Temporal data",
+      "description": "Samples using temporal data",
+      "url": "api_05_temporal.html",
+      "thumbnail": "api_05_temporal.png"
+    }
+  ]
+}, {
+  "title": "Route Plans",
+  "samples": [
+    {
+      "title": "Calculate route between two points",
+      "description": "Calculate route between two points using TMB Planner API",
+      "url": "api_06_route_two_points.html",
+      "thumbnail": "api_06_route_two_points.png"
+    },
+    {
+      "title": "Colored route from given coordinates",
+      "description": "Calculate a route between two points read from URL, and paint each leg in its corresponding color",
+      "url": "api_08_route_by_url.html?from=41.384115,2.111178&to=41.288982,2.074282",
+      "thumbnail": "api_08_route_by_url.png"
+    }
+  ]
+}
+]

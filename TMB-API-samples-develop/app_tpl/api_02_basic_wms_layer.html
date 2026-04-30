@@ -1,0 +1,108 @@
+<!doctype html>
+<html class="no-js">
+	<head>
+		include "head.html"
+
+		include "ol3/head.html"
+	</head>
+	<body>
+		<!--[if lt IE 10]>
+		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
+
+        include "header.html"
+
+        <section class="main-section">
+
+        <div class="container">
+
+			<h2>Basic WMS layer loader by GET</h2>
+
+			<p>
+				This sample shows how to load WMS layers passing the layer name by GET parameter as <i><b>layer=layer_name</b></i>.<br> e.g. <a href="./api_02_basic_wms_layer.html?layer=TMB:LINIES_METRO">?layer=TMB:LINIES_METRO</a>, <a href="./api_02_basic_wms_layer.html?layer=TMB:PARADES_ACTIVES">?layer=TMB:PARADES_ACTIVES</a>
+			</p>
+
+			<div id="map" class="map"></div>
+
+            include "text-muted.html"
+
+            include "footer.html"
+
+		</div>
+
+        </section>
+
+		include "ol3/tail.html"
+
+		include "tail.html"
+
+		include "ganalytics.html"
+
+		<script id="code">
+			// Bing Maps base layer
+			var baseLayer = new ol.layer.Tile({
+				source : new ol.source.TileWMS({
+					params : {
+						'LAYERS' : 'OI.OrthoimageCoverage',
+						'FORMAT' : 'image/jpeg'
+					},
+					url : 'https://www.ign.es/wms-inspire/pnoa-ma'
+				})
+			});
+
+			var map = new ol.Map({
+				layers: [baseLayer],
+				target: 'map',
+				view: new ol.View({
+					center: new ol.proj.transform([2.1574, 41.3987], "EPSG:4326", "EPSG:3857"),
+					projection: 'EPSG:3857',
+					zoom: 15
+				})
+			});
+
+			/**
+			 * Get layer parameter from URL
+			 * @param key
+			 * @returns {*}
+			 */
+			var getURLParameters = function(key) {
+				var KEY = 0, VALUE = 1;
+				var onlyParameters = window.location.href.split('?')[1];
+				if ( typeof onlyParameters == "undefined") {
+					return null;
+				}
+				var parametersAsString = onlyParameters.split('&');
+				var parameters = {};
+				for (var pair = 0; pair < parametersAsString.length; pair++) {
+					var keyAndValue = parametersAsString[pair].split('=');
+					if (keyAndValue[KEY] == key) {
+						console.log(keyAndValue[VALUE]);
+						return keyAndValue[VALUE];
+					}
+				}
+				return null;
+			};
+
+			var nameLayer = getURLParameters('layer') || 'TMB:XARXA_METRO';
+
+			var overlay = new ol.layer.Tile({
+				source : new ol.source.TileWMS({
+					params : {
+						'LAYERS' : nameLayer,
+						'FORMAT' : 'image/png8',
+						'app_key' : write_your_app_key_here,
+						'app_id' : write_your_app_id_here,
+						'name' : nameLayer
+					},
+					url : 'https://api.tmb.cat/v1/maps/wms'
+				})
+			});
+			
+			// on load, dinamically add layer from GET param or the default one.
+			map.addLayer(overlay);
+		</script>
+
+		include "sourcecode.html"
+
+	</body>
+</html>

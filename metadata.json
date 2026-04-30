@@ -1,0 +1,6 @@
+{
+  "name": "Miguel y Han Wu Bus Times",
+  "description": "App móvil para ver en tiempo real cuándo llega tu bus de TMB Barcelona",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
