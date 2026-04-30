@@ -3,14 +3,14 @@ services:
     name: buses-tmb
     env: node
     plan: free
-    buildCommand: npm install && npm run build
+    buildCommand: npm install
     startCommand: npm start
     envVars:
       - key: NODE_ENV
         value: production
       - key: TMB_APP_ID
-        value: 91bd6b08
+        sync: false
       - key: TMB_APP_KEY
-        value: 44c70cf7f4fd3c6c86c6c634b3cac625
+        sync: false
       - key: RENDER_API_KEY
-        value: rnd_gfxPGUiTPozK13CJ71KqfgC7MGQ4
+        sync: false
