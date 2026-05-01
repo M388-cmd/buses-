@@ -144,13 +144,14 @@ async function startServer() {
 
       const allStops = cachedStops || [];
       
-      let results = allStops;
-      if (query) {
-         results = allStops.filter((s: any) => 
-           s.NOM_PARADA && s.NOM_PARADA.toLowerCase().includes(query) ||
-           s.CODI_PARADA.toString().includes(query)
-         );
-      }
+       let results = allStops;
+       if (query) {
+          results = allStops.filter((s: any) => {
+            const nameMatch = s.NOM_PARADA && s.NOM_PARADA.toLowerCase().includes(query);
+            const codeMatch = s.CODI_PARADA.toString().includes(query);
+            return nameMatch || codeMatch;
+          });
+       }
       
       const uniqueStops = Array.from(new Map(results.map((s: any) => [s.CODI_PARADA, s])).values());
       
