@@ -22,6 +22,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [isOffline, setIsOffline] = useState<boolean>(false);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isSearchingStops, setIsSearchingStops] = useState(false);
   const searchTimeout = React.useRef<number | undefined>();
@@ -99,21 +100,21 @@ export default function App() {
     }
   }, [activeTab]);
 
-  const fetchArrivals = async (code: string) => {
+  const fetchArrivals = async (code: string, silent: boolean = false) => {
     if (!code.trim() || isOffline) return;
 
     setActiveStopCode(code);
-    setIsLoading(true);
+    if (!silent) setIsLoading(true);
     setError(null);
-    setConnections([]);
-    
+    if (!silent) setConnections([]);
+
     try {
       const [response, infoResponse] = await Promise.all([
         fetch(`/api/bus/parada/${code}`),
         fetch(`/api/bus/parada/${code}/info`)
       ]);
       const data = await response.json();
-      
+
       let infoData = { connections: [] };
       if (infoResponse.ok) {
         try {
@@ -127,12 +128,24 @@ export default function App() {
       }
 
       setArrivals(data);
+      setLastUpdated(new Date());
     } catch (err: any) {
-      setError(err.message || 'Error de red o de servidor');
+      if (!silent) setError(err.message || 'Error de red o de servidor');
     } finally {
-      setIsLoading(false);
+      if (!silent) setIsLoading(false);
     }
   };
+
+  // Auto-refresh every 15 seconds
+  useEffect(() => {
+    if (!activeStopCode || isOffline || activeTab !== 'paradas') return;
+
+    const interval = setInterval(() => {
+      fetchArrivals(activeStopCode, true);
+    }, 15000);
+
+    return () => clearInterval(interval);
+  }, [activeStopCode, isOffline, activeTab]);
 
   // Initial fetch
   useEffect(() => {
@@ -238,15 +251,20 @@ export default function App() {
                   <div>
                     <div className="text-[14px] font-bold text-[#1A1A1A] leading-tight">Parada {activeStopCode}</div>
                     <div className="text-[11px] text-[#888] leading-tight mt-0.5">Codi: {activeStopCode} &bull; Barcelona</div>
+                    {lastUpdated && (
+                      <div className="text-[10px] text-[#AAA] leading-tight mt-0.5">
+                        Actualizado: {lastUpdated.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                      </div>
+                    )}
                   </div>
                 </div>
-                <button 
+                <button
                   onClick={() => toggleFavorite(activeStopCode)}
                   className="w-10 h-10 flex items-center justify-center rounded-full active:scale-90 transition-all border border-gray-100"
                 >
-                  <Heart 
-                    size={22} 
-                    className={favorites.includes(activeStopCode) ? 'text-[#E21918] fill-[#E21918]' : 'text-gray-300'} 
+                  <Heart
+                    size={22}
+                    className={favorites.includes(activeStopCode) ? 'text-[#E21918] fill-[#E21918]' : 'text-gray-300'}
                   />
                 </button>
               </div>
